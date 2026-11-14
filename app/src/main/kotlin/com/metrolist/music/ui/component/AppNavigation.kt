@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalViewConfiguration
@@ -139,8 +140,20 @@ fun AppNavigationBar(
     onSearchLongClick: (() -> Unit)? = null,
     onHomeLongHold: (() -> Unit)? = null,
 ) {
-    val containerColor = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer
-    val contentColor = if (pureBlack) Color.White else MaterialTheme.colorScheme.onSurfaceVariant
+    // ORVYN dark navigation bar: near-black background with muted icons. Light theme keeps the default.
+    val isDarkTheme = MaterialTheme.colorScheme.background.luminance() < 0.5f
+    val containerColor =
+        when {
+            pureBlack -> Color.Black
+            isDarkTheme -> Color(0xFF0A0814)
+            else -> MaterialTheme.colorScheme.surfaceContainer
+        }
+    val contentColor =
+        when {
+            pureBlack -> Color.White
+            isDarkTheme -> Color(0xFF8D86A0)
+            else -> MaterialTheme.colorScheme.onSurfaceVariant
+        }
     val haptics = LocalHapticFeedback.current
     val viewConfiguration = LocalViewConfiguration.current
 
