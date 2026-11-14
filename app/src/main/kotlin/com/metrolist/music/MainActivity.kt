@@ -198,6 +198,7 @@ import com.metrolist.music.ui.screens.settings.NavigationTab
 import com.metrolist.music.ui.theme.ColorSaver
 import com.metrolist.music.ui.theme.DefaultThemeColor
 import com.metrolist.music.ui.theme.MetrolistTheme
+import com.metrolist.music.ui.theme.OrvynAccentColor
 import com.metrolist.music.ui.theme.extractThemeColor
 import com.metrolist.music.ui.utils.appBarScrollBehavior
 import com.metrolist.music.ui.utils.resetHeightOffset
@@ -597,7 +598,7 @@ class MainActivity : FragmentActivity() {
             }
         }
 
-        val darkTheme by rememberEnumPreference(DarkModeKey, defaultValue = DarkMode.AUTO)
+        val darkTheme by rememberEnumPreference(DarkModeKey, defaultValue = DarkMode.ON)
         val isSystemInDarkTheme = isSystemInDarkTheme()
         val useDarkTheme =
             remember(darkTheme, isSystemInDarkTheme) {
@@ -616,7 +617,7 @@ class MainActivity : FragmentActivity() {
                 pureBlackEnabled && useDarkTheme
             }
 
-        val (selectedThemeColorInt) = rememberPreference(SelectedThemeColorKey, defaultValue = DefaultThemeColor.toArgb())
+        val (selectedThemeColorInt) = rememberPreference(SelectedThemeColorKey, defaultValue = OrvynAccentColor.toArgb())
         val selectedThemeColor = Color(selectedThemeColorInt)
 
         val showChangelog = rememberSaveable { mutableStateOf(false) }
