@@ -26,7 +26,8 @@ concurrency:
 jobs:
   build_release:
     name: Build Release (${{ matrix.variant }})
-    if: github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]'
+    # Disabled: needs release signing secrets (ANDROID_SIGNING_KEY) not set on this fork.
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -175,7 +176,8 @@ jobs:
 
   publish_nightly:
     name: Publish Nightly Release
-    if: github.event_name == 'push'
+    # Disabled: depends on the release build above.
+    if: false
     needs: [build_release, build_debug]
     runs-on: ubuntu-latest
     timeout-minutes: 5
