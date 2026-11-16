@@ -1191,6 +1191,38 @@ fun HomeScreen(
                 state = lazylistState,
                 contentPadding = LocalPlayerAwareWindowInsets.current.asPaddingValues(),
             ) {
+                // ORVYN header (from the design mockup): wordmark, greeting, and avatar
+                item(key = "orvyn_header") {
+                    Row(
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp, vertical = 12.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = "Selamat datang",
+                                color = Color(0xFF8D86A0),
+                                fontSize = 13.sp,
+                            )
+                            Text(
+                                text = "ORVYN",
+                                color = Color.White,
+                                fontSize = 22.sp,
+                                fontWeight = FontWeight.Bold,
+                            )
+                        }
+                        Box(
+                            modifier =
+                                Modifier
+                                    .size(36.dp)
+                                    .clip(CircleShape)
+                                    .background(Color(0xFF1A1F2A)),
+                        )
+                    }
+                }
+
                 // ORVYN hero banner (from the design mockup)
                 item(key = "orvyn_hero") {
                     Box(
